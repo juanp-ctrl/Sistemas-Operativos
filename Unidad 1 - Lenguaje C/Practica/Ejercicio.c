@@ -19,7 +19,7 @@ int main(void){
     return EXIT_SUCCESS;
 }
 
-void functionPointer(int * pvar, int value){
+void functionPointer(int *pvar, int value){
 
     *pvar = (*pvar) + value;
 }
