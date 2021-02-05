@@ -26,10 +26,11 @@ int main(void) {
 		exit(8);  //reporta que algo salio mal
 	}
 	while(1){   //el 0 es el false y cualquier otro numero es el true, aqui creamos un loop infinito para leer todo el archivo
-		caracter = fgetc(infile);
+		caracter = getc(infile);
 		if(caracter == EOF){   //EOF es el end of file
 			break;
 		}
+		printf("Caracter %c \n", caracter);
 		++cont;
 	}
 	printf("Numero de caracteres del archivo %s es %d \n", archivo, cont);
