@@ -20,59 +20,55 @@ int main(void) {
 	printf("%s\n", "Ingrese el numero de materias");
 	scanf("%d", &numero);
 
-	char materias[3*numero][10];
+	typedef struct materias{  //Creamos la estructura de materia con un nombre, nota y creditos
+		char nombre[20];
+		float nota;
+		int creditos;
+	}materia;
 
-	for(int i=0; i<3*numero; i++){
+	materia *puntr;
+	puntr = malloc(sizeof(materia)*numero); //Reservamos un espacio en memoria del tamaño de estructuras * el numero de materias
 
-		int temp = i;
+	for(int i=0; i<numero; i++){  //Llenamos las estructuras
 
-		char cadena[8];
+		materia subject;
+		materia *punt;
+		punt = &subject;
 
 		printf("%s\n", "Ingrese el nombre de la materia");
-		scanf("%s", &cadena);
-		strcpy(materias[i],cadena);
-
+		scanf("%s", subject.nombre);
 		printf("%s\n", "Ingrese la nota de la materia");
-		scanf("%s", &cadena);
-		strcpy(materias[++i],cadena);
-
+		scanf("%f", &subject.nota);
 		printf("%s\n", "Ingrese el numero de creditos de la materia");
-		scanf("%s", &cadena);
-		strcpy(materias[++i],cadena);
+		scanf("%d", &subject.creditos);
 
+		puntr[i] = *punt;   //Guardamos en el heap el contenido del puntero (la estructura)
 	}
 
-	int tm = 0;
-	printf("%s\t%s\t%s\t\n", "Materia","Nota","Creditos");
-	for(int i=0; i<3*numero; i++){
-		tm++;
-		if(tm <= 3){
-			printf("%s\t", materias[i]);
-		}
-		if(tm == 3){
-			printf("\n");
-			tm = 0;
-		}
+	printf("%s %s\t%s\t\n","Materia","Nota","Creditos");
+
+	for(int i=0; i<numero; i++){
+		materia sub;
+		materia *puntero;
+		sub = puntr[i];  //Cargamos la estructura materia con el contenido del heap
+		puntero = &sub;  //Usamos el puntero
+		printf("%s\t%2.2f\t%d \n",(puntero)->nombre,(puntero)->nota,(puntero)->creditos);
 	}
 
+	float promedio = 0, pro, totalcr = 0, cr, totalnotas;
 
-	float promedio = 0, pro, totalcr, cr, totalnotas, tmr;
-	for(int i=0; i<3*numero; i++){
-		tmr++;
-		if(tmr==2){
-			totalnotas = *materias[i]-48;
-		}
-		if(tmr==3){
-			totalcr += (*materias[i]-48);
-			cr = *materias[i]-48;
-			promedio = promedio + (totalnotas) * (cr);
-			tmr = 0;
-		}
+ 	for(int i=0; i<numero; i++){
+		materia sub;
+		materia *puntero;
+		sub = puntr[i];
+		puntero = &sub;
+		totalnotas = (puntero)->nota;
+		totalcr += (float)(puntero)->creditos;
+		cr = (puntero)->creditos;
+		promedio = promedio + (totalnotas) * (cr);
 	}
-	pro = promedio / totalcr;
-
-	printf("%s%2.2f\n","El promdio ponderado es ", pro);
-
+ 	pro = promedio / totalcr;
+ 	printf("%s%2.2f\n","El promdio ponderado es ", pro);
 
 	return EXIT_SUCCESS;
 }
