@@ -15,7 +15,7 @@ int main(void)
 {
     char name[12];
     printf("What's your name? ");
-    scanf("%12s", name);  //De esta manera evitamos el buffer overflow
+    scanf("%s", name);  //De esta manera evitamos el buffer overflow
     printf("Hello %s!\n", name);
 	return EXIT_SUCCESS;
 }
