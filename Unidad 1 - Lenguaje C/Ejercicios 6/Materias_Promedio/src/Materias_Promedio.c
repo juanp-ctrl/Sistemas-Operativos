@@ -69,6 +69,7 @@ int main(void) {
 	}
  	pro = promedio / totalcr;
  	printf("%s%2.2f\n","El promdio ponderado es ", pro);
+ 	free(puntr);
 
 	return EXIT_SUCCESS;
 }

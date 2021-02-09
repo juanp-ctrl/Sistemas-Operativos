@@ -1,0 +1,8 @@
+Archivo de salida:
+Materia	Nota	Creditos
+Ingles	5.00	3
+Etica	4.00	1
+Total de materias: 2
+Materias ganadas: 2
+Materias perdidas: 0
+El promdio ponderado es 4.75

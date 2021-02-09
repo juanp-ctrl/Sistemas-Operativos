@@ -1,0 +1,7 @@
+Archivo de Entrada
+Materia: Ingles
+Nota: 5
+Creditos: 3
+Materia: Etica
+Nota: 4
+Creditos: 1
