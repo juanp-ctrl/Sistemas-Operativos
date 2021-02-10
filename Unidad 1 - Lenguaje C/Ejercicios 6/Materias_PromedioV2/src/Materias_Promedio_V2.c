@@ -26,13 +26,13 @@ int main(void) {
 		int creditos;
 	}materia;
 
-	materia *puntr;
+	materia *puntr;  //Esto es para almacenar elementos de tipo materia en la memoria
 	puntr = malloc(sizeof(materia)*numero); //Reservamos un espacio en memoria del tamaño de estructuras * el numero de materias (Array de structuras en el heap)
 
 	for(int i=0; i<numero; i++){  //Llenamos las estructuras
 
 		printf("%s\n", "Ingrese el nombre de la materia");
-		scanf("%19s", (puntr+i)->nombre);
+		scanf("%19s", (puntr+i)->nombre);        //puntr+i = puntr[i] para acceder al elemento de la memoria
 		printf("%s\n", "Ingrese la nota de la materia");
 		scanf("%f", &(puntr+i)->nota);
 		printf("%s\n", "Ingrese el numero de creditos de la materia");
