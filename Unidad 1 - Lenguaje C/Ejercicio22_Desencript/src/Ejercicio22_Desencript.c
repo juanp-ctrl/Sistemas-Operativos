@@ -16,15 +16,19 @@
 
 int encript(int letra);
 
-int main(void){
+int main(int argc, char *argv){
 
 	FILE *fp, *fout;
 	char entrada[50], input[15], salida[15], function[5];
 	int tamaño;
-	printf("Ingresa Archivo_a_Desencriptar Archivo_de_salida Función\n");
-	fgets(entrada, 49, stdin);
+	//printf("Ingresa Archivo_a_Encriptar Archivo_de_salida Función\n");
+	//fgets(entrada, 49, stdin);
 
-	sscanf(entrada, "%s %s %s", input, salida, function);  //Leemos de una cadena y guardamos en tres cadenas
+	strcpy(input, argv[1]);
+	strcpy(salida, argv[2]);
+	strcpy(function, argv[3]);
+
+	//sscanf(entrada, "%s %s %s", input, salida, function);  //Leemos de una cadena y guardamos en tres cadenas
 
 	fp = fopen(input, "r");
 	fout = fopen(salida, "w");
