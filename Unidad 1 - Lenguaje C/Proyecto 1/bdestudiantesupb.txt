@@ -1,0 +1,4 @@
+bdestudiantesupb 10 3
+12345	juanpa	5
+93802	carlos	7
+27823	elis	8

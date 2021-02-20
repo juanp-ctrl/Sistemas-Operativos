@@ -1,4 +1,0 @@
-dbestudiantes 9 3
-92892	juanpa	5
-28117	carlos	7
-29891	hernan	8
