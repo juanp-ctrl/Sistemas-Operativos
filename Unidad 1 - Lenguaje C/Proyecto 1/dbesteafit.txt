@@ -1,0 +1,4 @@
+dbesteafit.txt 9 3
+12345	juanpa	5
+29839	jose	8
+23892	lilia	9

@@ -122,8 +122,10 @@ void loaddb(char nombre[]){
 }
 
 void savedb(char nombre[]){
-	strcat(nombre, ".txt");
-	pfile = fopen(nombre, "w");
+	char ruta[strlen(nombre)];
+	strcpy(ruta,nombre);
+	strcat(ruta, ".txt");
+	pfile = fopen(ruta, "w");
 
 	if(pfile == NULL){
 		puts("Error en la apertura del archivo");
@@ -159,7 +161,7 @@ void mkreg(int cedula, char nombre[], int semestre){
 		printf("No se ha creado o cargado una base de datos\n");
 	}
 	else{
-		if(p <= tamaño){
+		if(p < tamaño){
 			estudiante est;
 			est.cedula = cedula;
 			strcpy(est.nombre, nombreest);
