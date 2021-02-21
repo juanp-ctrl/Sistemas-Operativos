@@ -1,0 +1,4 @@
+dbestudiantes 3 3
+23839	pablo	7
+23893	carlos	8
+92937	lili	4

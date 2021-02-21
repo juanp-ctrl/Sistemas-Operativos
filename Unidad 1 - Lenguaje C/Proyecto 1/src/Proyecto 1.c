@@ -101,8 +101,10 @@ void mkdb(char nombre[], int tamaño){
 }
 
 void loaddb(char nombre[]){
-	strcat(nombre, ".txt");
-	pfile = fopen(nombre, "r");
+		char rutal[20];
+		strcpy(rutal,nombre);
+		strcat(rutal, ".txt");
+		pfile = fopen(rutal, "r");
 
 	if(pfile == NULL){
 		puts("Error en la apertura del archivo");
@@ -122,10 +124,10 @@ void loaddb(char nombre[]){
 }
 
 void savedb(char nombre[]){
-	char ruta[strlen(nombre)];
-	strcpy(ruta,nombre);
-	strcat(ruta, ".txt");
-	pfile = fopen(ruta, "w");
+	char rutal[20];
+	strcpy(rutal,nombre);
+	strcat(rutal, ".txt");
+	pfile = fopen(rutal, "w");
 
 	if(pfile == NULL){
 		puts("Error en la apertura del archivo");
