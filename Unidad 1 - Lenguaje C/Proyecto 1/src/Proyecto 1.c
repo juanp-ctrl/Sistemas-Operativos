@@ -33,7 +33,7 @@ void salir();
 	estudiante *puntr = NULL;
 
 	char entrada[100], comand[40], nombredb[20], nombreest[20], ruta[20];
-	int salida = 0, tamaño, cedula, semestre, p;
+	int salida = 0, tamaño = 0, cedula, semestre, p;
 
 int main(void) {
 	puts("!!!Base de datos de Estudiantes!!!");
@@ -90,9 +90,14 @@ int main(void) {
 }
 
 void mkdb(char nombre[], int tamaño){
+	if((nombre == NULL) | (tamaño == 0)){
+		puts("comando mkdb ingresado incorrectamente");
+	}
+	else{
 	puntr = malloc(sizeof(estudiante)* tamaño);
 	p = 0;
 	printf("Base de datos creada exitosamente\n");
+	}
 }
 
 void loaddb(char nombre[]){
@@ -117,8 +122,8 @@ void loaddb(char nombre[]){
 }
 
 void savedb(char nombre[]){
-	strcat(ruta, ".txt");
-	pfile = fopen(ruta, "w");
+	strcat(nombre, ".txt");
+	pfile = fopen(nombre, "w");
 
 	if(pfile == NULL){
 		puts("Error en la apertura del archivo");
@@ -154,11 +159,16 @@ void mkreg(int cedula, char nombre[], int semestre){
 		printf("No se ha creado o cargado una base de datos\n");
 	}
 	else{
-		estudiante est;
-		est.cedula = cedula;
-		strcpy(est.nombre, nombreest);
-		est.semestre = semestre;
-		puntr[p++] = est;
+		if(p <= tamaño){
+			estudiante est;
+			est.cedula = cedula;
+			strcpy(est.nombre, nombreest);
+			est.semestre = semestre;
+			puntr[p++] = est;
+		}
+		else{
+			puts("Se ha completado el numero de registros permitidos");
+		}
 	}
 }
 
@@ -168,9 +178,16 @@ void salir(){
 		printf("No  ha creado o cargado una base de datos, hasta luego\n");
 	}
 	else{
-		savedb(nombredb);
+		printf("1.Para salir sin guardar \n2.Para guardar y salir\n");
+		int op = 0;
+		scanf(" %d", &op);
+		if(op == 2){
+			savedb(nombredb);
+		}
+		puts("Hasta luego");
 	}
 	salida = 1;
+	free(puntr);
 }
 
 void readreg(int cedula){
