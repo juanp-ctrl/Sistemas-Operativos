@@ -27,7 +27,7 @@ void new_db(s_datab* db, char* nombre, int regs){
 	strcpy(db->nombre, nombre);
 	db->N_registros = 0;
 	db->tamaño = regs;
-	db->registros = malloc(sizeof(struct s_estud)*regs);
+	db->registros = malloc(sizeof(struct s_estud*)*regs);
 }
 
 void des_db(s_datab* db){
@@ -38,4 +38,9 @@ void des_db(s_datab* db){
 void crear_registro(s_datab* db, struct s_estud* estud){
 	db->registros[db->N_registros++] = &estud;
 }
+
+char* get_nom(s_datab* db){
+	return db->nombre;
+}
+
 

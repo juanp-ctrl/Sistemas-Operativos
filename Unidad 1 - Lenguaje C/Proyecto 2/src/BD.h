@@ -19,4 +19,6 @@ void des_db(struct s_datab*);
 
 void crear_reg(struct s_datab*, struct s_estud*);
 
+char* get_nom(struct s_datab*);
+
 #endif /* BD_H_ */
