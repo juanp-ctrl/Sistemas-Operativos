@@ -16,6 +16,10 @@
 
 void mdb(struct s_datab* db, char* nombre, int tamaño);
 void lsdbs();
+void gdb();
+void radb();
+void rsdb();
+void mreg(char* nombre, int cedula, int semestre);
 void salir(struct s_datab* db);
 
 	FILE *pfile;
@@ -50,36 +54,36 @@ int main(void) {
 		}*/
 
 		else if(strncmp(comand, "lsdbs", 5) == 0){
-			//funcion
+			lsdbs();
 		}
 
-		/*else if(strncmp(comand, "gdb", 3) == 0){
-			readsize();
+		else if(strncmp(comand, "gdb", 3) == 0){
+			gdb();
 		}
 
-		else if(strncmp(comand, "sdb", 3) == 0){
+		/*else if(strncmp(comand, "sdb", 3) == 0){
 			sscanf(entrada, "%s %s", comand, ruta);
 			savedb(ruta);
 		}
 
-		else if(strncmp(comand, "radb", 4) == 0){
-			readsize();
+		*/else if(strncmp(comand, "radb", 4) == 0){
+			radb();
 		}
 
 		else if(strncmp(comand, "rsdb", 4) == 0){
-			readsize();
+			rsdb();
 		}
 
-		else if(strncmp(comand, "svdb", 4) == 0){
+		/*else if(strncmp(comand, "svdb", 4) == 0){
 			readsize();
-		}
+		}*/
 
 		else if(strncmp(comand, "mreg", 4) == 0){
 			sscanf(entrada, "%s %d %s %d", comand, &cedula, nombreest, &semestre);
-			mkreg(cedula, nombreest, semestre);
+			mreg(nombreest, cedula, semestre);
 		}
 
-		else if(strncmp(comand, "rr", 2) == 0){
+		/*else if(strncmp(comand, "rr", 2) == 0){
 			sscanf(entrada, "%s %d", comand, &cedula);
 			readreg(cedula);
 		}*/
@@ -102,13 +106,35 @@ void mdb(struct s_datab* db, char* nombre, int tamaño){
 	array_punteros[itera++] = db;
 }
 
+void lsdbs(){
+	for(int i=0; i<itera; i++){
+		printf("BD %d Nombre: %s Tamaño: %d Registros: %d\n", i+1, get_nom(array_punteros[i]), get_tam(array_punteros[i]), get_regs(array_punteros[i]));
+	}
+}
+
+void gdb(){
+	printf("La base de datos activa es: %s Tamaño: %d Registros: %d\n", get_nom(pt_a), get_tam(pt_a), get_regs(pt_a));
+}
+
+void radb(){
+	leer_regs(pt_a);
+}
+
+void rsdb(){
+	printf("La cantidad de registros en la base de datos es: %d", get_regs(pt_a));
+}
+
+void mreg(char* nombre, int cedula, int semestre){
+	crear_reg(pt_a, nombre, cedula, semestre);
+}
+
 void salir(struct s_datab* db){
 	puts("Desea guardar la base de datos antes de salir ?");
 	if(db == NULL){
 		printf("No ha creado o cargado una base de datos, hasta luego\n");
 	}
 	else{
-		printf("La base de datos Activa es %s\n1.Para salir sin guardar \n2.Para guardar y salir\n",  get_nom(db));
+		printf("La base de datos activa es %s\n1.Para salir sin guardar \n2.Para guardar y salir\n",  get_nom(db));
 		int op = 0;
 		scanf(" %d", &op);
 		if(op == 2){
@@ -116,5 +142,6 @@ void salir(struct s_datab* db){
 		}
 		puts("Hasta luego");
 	}
+	des_db(db);
 	salida = 1;
 }

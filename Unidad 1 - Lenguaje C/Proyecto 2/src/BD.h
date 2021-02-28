@@ -17,8 +17,12 @@ void new_db(struct s_datab* db, char* nombre, int regs);
 
 void des_db(struct s_datab*);
 
-void crear_reg(struct s_datab*, struct s_estud*);
+void crear_reg(struct s_datab*, char* nombre, int cedula, int semestre);
 
+//Metodos Accesores
 char* get_nom(struct s_datab*);
+int get_tam(struct s_datab*);
+int get_regs(struct s_datab*);
+void leer_regs(struct s_datab*);
 
 #endif /* BD_H_ */

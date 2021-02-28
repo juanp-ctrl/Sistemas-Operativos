@@ -15,7 +15,7 @@ typedef struct databases{
 	char* nombre;
 	int N_registros;
 	int tamaño;
-	int* registros;
+	struct s_estud** registros;
 } s_datab;
 
 s_datab* datab(){
@@ -35,12 +35,28 @@ void des_db(s_datab* db){
 	free(db->registros);
 }
 
-void crear_registro(s_datab* db, struct s_estud* estud){
-	db->registros[db->N_registros++] = &estud;
+void crear_reg(s_datab* db, char* nombre, int cedula, int semestre){
+	 struct s_estud* estudiante = estud();
+	 db->registros[db->N_registros++] = estudiante;
+	 new_estud(estudiante, nombre, cedula, semestre);
 }
 
 char* get_nom(s_datab* db){
 	return db->nombre;
+}
+
+int get_tam(s_datab* db){
+	return db->tamaño;
+}
+
+int get_regs(s_datab* db){
+	return db->N_registros;
+}
+
+void leer_regs(s_datab* db){
+	for(int i=0; i<db->N_registros; i++){
+		printf("Cedula: %d Nombre: %s Semestre: %d\n", get_sced((struct s_estud*)db->registros[i]), get_snom((struct s_estud*)db->registros[i]), get_ssem((struct s_estud*)db->registros[i]));
+	}
 }
 
 

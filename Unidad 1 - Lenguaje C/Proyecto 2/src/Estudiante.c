@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct estudiantes{
 	char* nombre;
@@ -27,4 +28,16 @@ void new_estud(s_estud* estud, char* nombre, int cedula, int semestre){
 
 void  des_estud(s_estud* estud){
 	free(estud->nombre);
+}
+
+char* get_snom(s_estud* estud){
+	return estud->nombre;
+}
+
+int get_sced(s_estud* estud){
+	return estud->cedula;
+}
+
+int get_ssem(s_estud* estud){
+	return estud->semestre;
 }

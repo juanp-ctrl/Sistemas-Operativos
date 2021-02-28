@@ -16,4 +16,8 @@ void new_estud(struct s_estud* estud, char* nombre, int cedula, int semestre);
 
 void des_estud(struct s_estud*);
 
+char* get_snom(struct s_estud*);
+int get_sced(struct s_estud*);
+int get_ssem(struct s_estud*);
+
 #endif /* ESTUDIANTE_H_ */
