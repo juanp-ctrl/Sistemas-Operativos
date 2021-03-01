@@ -20,6 +20,7 @@ void gdb();
 void radb();
 void rsdb();
 void mreg(char* nombre, int cedula, int semestre);
+void rr(int cedula);
 void salir(struct s_datab* db);
 
 	FILE *pfile;
@@ -83,10 +84,10 @@ int main(void) {
 			mreg(nombreest, cedula, semestre);
 		}
 
-		/*else if(strncmp(comand, "rr", 2) == 0){
+		else if(strncmp(comand, "rr", 2) == 0){
 			sscanf(entrada, "%s %d", comand, &cedula);
-			readreg(cedula);
-		}*/
+			rr(cedula);
+		}
 
 		else if(strncmp(comand, "exit", 4) == 0){
 			salir(pt_a);
@@ -126,6 +127,14 @@ void rsdb(){
 
 void mreg(char* nombre, int cedula, int semestre){
 	crear_reg(pt_a, nombre, cedula, semestre);
+}
+
+void rr(int cedula){
+	for(int i=0; i<get_regs(pt_a); i++){
+		if(cedula == get_sced((struct s_estud*)get_registro(pt_a,i))){
+			printf("Cedula: %d Nombre: %s Semestre: %d\n", get_sced((struct s_estud*)get_registro(pt_a,i)), get_snom((struct s_estud*)get_registro(pt_a,i)), get_ssem((struct s_estud*)get_registro(pt_a,i)));
+		}
+	}
 }
 
 void salir(struct s_datab* db){

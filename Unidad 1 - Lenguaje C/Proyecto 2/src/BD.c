@@ -53,6 +53,10 @@ int get_regs(s_datab* db){
 	return db->N_registros;
 }
 
+struct s_estud* get_registro(s_datab* db, int i){
+	return db->registros[i];
+}
+
 void leer_regs(s_datab* db){
 	for(int i=0; i<db->N_registros; i++){
 		printf("Cedula: %d Nombre: %s Semestre: %d\n", get_sced((struct s_estud*)db->registros[i]), get_snom((struct s_estud*)db->registros[i]), get_ssem((struct s_estud*)db->registros[i]));

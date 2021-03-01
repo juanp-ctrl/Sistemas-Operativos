@@ -23,6 +23,7 @@ void crear_reg(struct s_datab*, char* nombre, int cedula, int semestre);
 char* get_nom(struct s_datab*);
 int get_tam(struct s_datab*);
 int get_regs(struct s_datab*);
+struct s_datab* get_registro(struct s_datab*, int);
 void leer_regs(struct s_datab*);
 
 #endif /* BD_H_ */
