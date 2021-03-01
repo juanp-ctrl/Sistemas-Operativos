@@ -33,6 +33,7 @@ void new_db(s_datab* db, char* nombre, int regs){
 void des_db(s_datab* db){
 	free(db->nombre);
 	free(db->registros);
+	free(db);
 }
 
 void crear_reg(s_datab* db, char* nombre, int cedula, int semestre){

@@ -28,6 +28,7 @@ void new_estud(s_estud* estud, char* nombre, int cedula, int semestre){
 
 void  des_estud(s_estud* estud){
 	free(estud->nombre);
+	free(estud);
 }
 
 char* get_snom(s_estud* estud){
