@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 		total += numeros[i];
 	}
 	for (int i = 0; i < argc-2; i++) {
-		for (int j = i+1; j < argc-2; j++) {
+		for (int j = i+1; j < argc-1; j++) {
 		   if(numeros[i] > numeros[j]) {
 			   temp = numeros[i];
 			   numeros[i] = numeros[j];
@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
 		   }
 		}
 	}
-	promedio = total / argc;
+	promedio = total / (argc-1);
 	min = numeros[0];
-	max = numeros[argc-2];
+	max = numeros[argc-1];
 	printf("Promedio %d, Min %d, Max %d\n", promedio, min, max);
 
 	return EXIT_SUCCESS;
