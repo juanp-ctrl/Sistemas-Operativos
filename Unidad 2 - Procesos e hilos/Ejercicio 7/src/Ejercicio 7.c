@@ -14,7 +14,7 @@
 
  int main()
  {
-
+	 	 printf("Proceso %d\n", getpid());
          char *args[]={"./EXEC",NULL};  //Un arreglo de punteros de tipo char que termina con un NULL
          execv(args[0],args);  //Le pasamos el archivo a ejecutar y la lista de punteros de tipo char
 

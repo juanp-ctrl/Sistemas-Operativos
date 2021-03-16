@@ -10,7 +10,7 @@
 
  int main()
  {
-     int i;
+     printf("Proceso %d\n", getpid());
 
      printf("I am EXEC.c called by execv() ");
      printf("\n");
