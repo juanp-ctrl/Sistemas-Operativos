@@ -14,10 +14,8 @@ int main(int argc, char *argv[]){
 	FILE *pfile, *pfout;
 	char array_lineas[100][26];
 
-	printf("%s", argv[1]);
-
-	 pfile = fopen(argv[0], "r");
-	 pfout = fopen(argv[1], "w");
+	 pfile = fopen(argv[1], "r");
+	 pfout = fopen(argv[2], "w");
 
 	  if(pfile == NULL){
 		  perror("Archivo 1 no abierto");

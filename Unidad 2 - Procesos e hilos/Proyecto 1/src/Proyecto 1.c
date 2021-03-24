@@ -19,15 +19,17 @@ int main(int argc, char *argv[]) {
 
 	int id = 0;
 
-	char *argsp1[3];
-	argsp1[0] = argv[1];
-	argsp1[1] = argv[2];
-	argsp1[2] = NULL;
+	char *argsp1[4];
+	argsp1[0] = argv[0];
+	argsp1[1] = argv[1];
+	argsp1[2] = argv[2];
+	argsp1[3] = NULL;
 
-	char *argsp2[3];
-	argsp2[0] = argv[1];
-	argsp2[1] = argv[3];
-	argsp2[2] = NULL;
+	char *argsp2[4];
+	argsp2[0] = argv[0];
+	argsp2[1] = argv[1];
+	argsp2[2] = argv[3];
+	argsp2[3] = NULL;
 
 	for (int hijo = 0; hijo < 2; ++hijo) {
 
@@ -66,25 +68,25 @@ int main(int argc, char *argv[]) {
 
 	FILE *pfout1, *pfout2;
 
-	pfout1 = fopen(argsp1[1], "r");
+	pfout1 = fopen(argv[2], "r");
 	if(pfout1 == NULL){
 		  perror("Error en Archivo 1 no abierto");
 		  return 1;
 	}
 
-	pfout2 = fopen(argsp2[1], "r");
+	pfout2 = fopen(argv[3], "r");
 	if(pfout2 == NULL){
 		  perror("Error en Archivo 2 no abierto");
 		  return 1;
 	}
 
-	puts("Archivo generado por p1");
+	puts("Archivo generado por p1\n");
 	char linea[30];
 	while(fgets(linea, 29, pfout1) != NULL){
 		printf("%s\n",linea);
 	}
 
-	puts("Archivo generado por p2");
+	puts("Archivo generado por p2\n");
 	while(fgets(linea, 29, pfout2) != NULL){
 		printf("%s\n",linea);
 	}

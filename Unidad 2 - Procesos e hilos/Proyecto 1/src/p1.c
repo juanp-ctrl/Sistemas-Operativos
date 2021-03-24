@@ -14,8 +14,8 @@ int main(int argc, char *argv[]){
 
 	  FILE *pfile, *pfout;
 
-	  pfile = fopen(argv[0], "r");
-	  pfout = fopen(argv[1], "w");
+	  pfile = fopen(argv[1], "r");
+	  pfout = fopen(argv[2], "w");
 	  char titulo[21];
 	  int valor;
 	  char entrada[26];
