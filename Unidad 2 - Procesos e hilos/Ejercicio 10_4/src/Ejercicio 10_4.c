@@ -30,6 +30,6 @@ int main(void) {
 	for(i=0; i<4; i++){
 		pthread_join(hilos_ids[i], NULL);
 	}
-	printf("Hilo principal: x = %d \n", x);
+	printf("Hilo principal: x = %d \n", x)
 	return EXIT_SUCCESS;
 }

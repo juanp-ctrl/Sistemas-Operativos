@@ -10,11 +10,12 @@
 #include <string.h>
 #include <math.h>
 
-int main(){
+int main(int argc, char *argv[]){
 
 	  FILE *pfile, *pfout;
-	  pfile = fopen("input.txt", "r");
-	  pfout = fopen("outputP1.txt", "w");
+
+	  pfile = fopen(argv[0], "r");
+	  pfout = fopen(argv[1], "w");
 	  char titulo[21];
 	  int valor;
 	  char entrada[26];

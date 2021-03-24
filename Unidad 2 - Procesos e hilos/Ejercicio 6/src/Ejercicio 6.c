@@ -13,9 +13,11 @@
 #include <wait.h>
 #include <unistd.h>
 
-int main(void) {
+int main(int argc, char *argv[]) {
 	pid_t hijo1;
 	pid_t hijo2;
+
+	printf("%s %d %d %d", argv[1], argv[2], argv[3], argv[4]);
 
 	hijo1 = fork();     //Creamos el proceso hijo
 	if(wait(NULL) == hijo1){   //Si estamos en el proceso hijo su id sera 0 entonces no aplica pero si estamos en el padre

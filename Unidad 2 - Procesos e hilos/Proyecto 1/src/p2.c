@@ -9,21 +9,23 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(){
+int main(int argc, char *argv[]){
 
 	FILE *pfile, *pfout;
 	char array_lineas[100][26];
 
-	 pfile = fopen("input.txt", "r");
-	 pfout = fopen("outputP2.txt", "w");
+	printf("%s", argv[1]);
+
+	 pfile = fopen(argv[0], "r");
+	 pfout = fopen(argv[1], "w");
 
 	  if(pfile == NULL){
-		  perror("Archivo no abierto");
+		  perror("Archivo 1 no abierto");
 		  return 1;
 	  }
 
 	  if(pfout == NULL){
-		  perror("Archivo no abierto");
+		  perror("Archivo 2 no abierto");
 		  return 1;
 	  }
 
@@ -33,8 +35,11 @@ int main(){
 	  }
 
 	  for(int i=99; i>=0; i--){
-		  printf("%s", array_lineas[i]);
+		  fprintf(pfout, "%s", array_lineas[i]);
 	  }
+
+	  fclose(pfile);
+	  fclose(pfout);
 
 	return EXIT_SUCCESS;
 }
