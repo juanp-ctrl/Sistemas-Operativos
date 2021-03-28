@@ -1,0 +1,4 @@
+juanpa medico 22
+garen soldado 30
+corki piloto 50
+ekko ingeniero 16
