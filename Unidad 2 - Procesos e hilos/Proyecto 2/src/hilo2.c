@@ -16,7 +16,7 @@ int main(int argc, char *argv[]){
 	FILE *pfile = fopen(argv[1], "r");
 
 	if(pfile == NULL){
-		perror("Error en apertura de archivo");
+		perror("Error en apertura de este archivo");
 		return 1;
 	}
 
@@ -97,6 +97,7 @@ int main(int argc, char *argv[]){
 
 	fclose(pfile);
 	fclose(pout);
+	puts("Hilo2 termino");
 
 	return EXIT_SUCCESS;
 }

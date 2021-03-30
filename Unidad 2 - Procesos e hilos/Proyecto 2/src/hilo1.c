@@ -45,6 +45,7 @@ int main(int argc, char *argv[]){
 
 	fclose(pfile);
 	fclose(pout);
+	puts("Hilo1 termino");
 
 	return EXIT_SUCCESS;
 }
