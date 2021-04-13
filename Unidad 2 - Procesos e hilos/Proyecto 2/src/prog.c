@@ -198,7 +198,6 @@ int main(int argc, char *argv[]){
 	pthread_t hilo1, hilo2;
 	arg hilo1_p, hilo2_p;
 
-
 	hilo1_p.args[0] = argv[0];
 	hilo1_p.args[1] = argv[1];
 	hilo1_p.args[2] = argv[2];
