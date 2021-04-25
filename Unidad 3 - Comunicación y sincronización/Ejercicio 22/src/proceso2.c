@@ -34,7 +34,7 @@
          exit(EXIT_FAILURE);
      }
 
-     char* ptr = (char*)map;
+     char *ptr = (char *)map;
      fprintf(stdout, "El contenido del archivo de memoria compartida es: %s\n", ptr);
 
 

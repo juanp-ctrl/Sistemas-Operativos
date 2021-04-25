@@ -45,12 +45,8 @@
          exit(EXIT_FAILURE);
      }
 
-     char* ptr = (char*)map;
-     ptr[0] = 'A';
-     ptr[1] = 'B';
-     ptr[2] = 'C';
-     ptr[3] = '\n';
-     ptr[4] = '\0';
+     char *ptr = (char *)map;
+     strcat(ptr, "Hola como estas.\n");
 
      fprintf(stdout, "Los datos han sido escritos en la memoria compartida.\n");
 
