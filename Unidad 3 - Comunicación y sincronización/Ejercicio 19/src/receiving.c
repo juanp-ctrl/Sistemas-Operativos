@@ -35,6 +35,7 @@ int main(void) {
       perror("msgget");
       exit(1);
    }
+
    printf("Cola de mensajes, lista para recivir mensajes\n");
 
    for(;;) { /* normally receiving never ends but just to make conclusion */
