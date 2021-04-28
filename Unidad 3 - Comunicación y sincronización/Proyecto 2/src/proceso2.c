@@ -16,14 +16,14 @@
 
 #define PERMS 0644
 
-struct my_msgbuf {
+struct bufstr {
    long mtype;
    char mtext[128];
 };
 
 void *enviar(void *msqid){
 
-    struct my_msgbuf buf;
+    struct bufstr buf;
     int len;
 
     printf("Bienvenido al chat usuario TWO.\n\n");
@@ -58,7 +58,7 @@ void *enviar(void *msqid){
 
 void *leer(void *msqid){
 
-    struct my_msgbuf buf;
+    struct bufstr buf;
     int len;
 
     for(;;) {
