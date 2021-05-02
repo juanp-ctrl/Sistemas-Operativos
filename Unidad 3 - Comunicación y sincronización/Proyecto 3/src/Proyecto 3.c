@@ -22,23 +22,24 @@
 #define SH_SIZE 16
 
 int descriptor;
+int descriptor2;
 sem_t *semaforoesc = NULL;
 sem_t *semaforolee = NULL;
 sem_t *semaforoesc2 = NULL;
 sem_t *semaforolee2 = NULL;
 
-void* mapa = NULL;
-
 void *enviar(void *data){
 
-	if(mapa == MAP_FAILED){
+	void* mapa1 = mmap(NULL, SH_SIZE, PROT_WRITE, MAP_SHARED, descriptor, 0);
+
+	if(mapa1 == MAP_FAILED){
 		perror("Error al crear el mapa");
 		exit(EXIT_FAILURE);
 	}
 
 	char texto[32];
 
-	char *ptrtexto = (char *)mapa;	//Le asiganamos la direccion que nos da el mapa
+	char *ptrtexto = (char *)mapa1;	//Le asiganamos la direccion que nos da el mapa
 
 	while(texto[0] != 'Q'){
 
@@ -67,12 +68,14 @@ void *enviar(void *data){
 
 void *leer(void *data){
 
-	if(mapa == MAP_FAILED){
+	void* mapa2 = mmap(NULL, SH_SIZE, PROT_WRITE, MAP_SHARED, descriptor2, 0);
+
+	if(mapa2 == MAP_FAILED){
 		perror("Error al crear el mapa");
 		exit(EXIT_FAILURE);
 	}
 
-	char *ptrtexto = (char *)mapa;	//Le asiganamos la direccion que nos da el mapa
+	char *ptrtexto = (char *)mapa2;	//Le asiganamos la direccion que nos da el mapa
 
 	while(ptrtexto[0] != 'Q'){
 
@@ -115,6 +118,18 @@ int main(void) {
 		exit(EXIT_FAILURE);
 	}
 
+	descriptor2 = shm_open("memoria_comp2", O_CREAT | O_RDWR, 0600);
+
+	if(descriptor2 < 0){
+		perror("Error al crear el archivo de memoria compartida 2.");
+		exit(EXIT_FAILURE);
+	}
+
+	if(ftruncate(descriptor2, SH_SIZE * sizeof(char)) < 0){
+		perror("Error al truncar el shared-memory-object 2");
+		exit(EXIT_FAILURE);
+	}
+
 	//Creamos el semaforo de escritura
 
 	semaforoesc = sem_open("semaforo_esc", O_CREAT, 0600, 1);
@@ -144,8 +159,6 @@ int main(void) {
 		perror("Error al crear el semafor");
 		exit(EXIT_FAILURE);
 	}
-
-	mapa = mmap(NULL, SH_SIZE, PROT_WRITE, MAP_SHARED, descriptor, 0);
 
 	puts("Bienvenido al chat:");
 
