@@ -23,6 +23,7 @@ struct stat infofile;
 DIR *array_ptr[64];
 int itera = 0;
 char prefijo[512], acomulado[512], origen[512];
+int tab = 0;
 
 void report_error(char *msg) /* Unix-style error */
 {
@@ -39,7 +40,7 @@ void leer_dir(DIR *ptr_d, char prefi[64]){
 
 		if( (strcmp(struct_dir->d_name,".") == 0) || (strcmp(struct_dir->d_name,"..") == 0)){
 
-			printf("Directorio encontrado: %s\n", struct_dir->d_name);
+			//printf("Dir: %s\n", struct_dir->d_name);
 
 		}
 
@@ -54,7 +55,15 @@ void leer_dir(DIR *ptr_d, char prefi[64]){
 
 			if(S_ISDIR(infofile.st_mode)){		//Es directorio
 
-				printf("Directorio encontrado: %s\n", struct_dir->d_name);
+				if(tab == 1){
+					printf("\tDir: %s\n", struct_dir->d_name);
+				}
+				else if(tab == 2){
+					printf("\t\tDir: %s\n", struct_dir->d_name);
+				}
+				else{
+					printf("Dir: %s\n", struct_dir->d_name);
+				}
 
 				strcat(acomulado,"/");
 				strcat(acomulado,struct_dir->d_name);
@@ -62,14 +71,15 @@ void leer_dir(DIR *ptr_d, char prefi[64]){
 				if( (array_ptr[itera] = opendir(acomulado)) == NULL){
 					report_error("Error de directorio");
 				}
-
+				tab++;
 				leer_dir(array_ptr[itera++], acomulado);
 				strcat(acomulado,"/..");
+				tab = 0;
 			}
 
 			else{							    //Es archivo regular
 
-				printf("Archivo encontrado: %s\n", struct_dir->d_name);
+				printf("\t|__Arc: %s\n", struct_dir->d_name);
 
 			}
 
