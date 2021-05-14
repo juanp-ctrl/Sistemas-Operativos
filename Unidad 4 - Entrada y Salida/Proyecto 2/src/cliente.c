@@ -133,6 +133,7 @@
              printf("Entrada nula\n");
          }
          if( 0 == strncmp(buf,"/q",strlen("/q")) ){
+        	 write(client.socket, "del", 4);
              printf("Sesion cerrada\n");
              break;
          }

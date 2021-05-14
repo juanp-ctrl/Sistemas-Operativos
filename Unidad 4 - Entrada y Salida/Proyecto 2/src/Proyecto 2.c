@@ -43,6 +43,8 @@ void *comandos(void *arg){
        scanf("%s",comando);
        if (strcmp(comando,"/del") == 0){
 
+    	   printf("Ingresa el usuario a desconectar:\n");
+
            scanf("%s",cliente);
            for(int i=0; i<=maxC; i++){
 
@@ -74,12 +76,13 @@ void *comandos(void *arg){
                    if((client+i)->numClientes == control){
 
                 	   strcpy(buf, "Te has desconectado\n");
-                       status = write((client+control)->socket, buf, strlen(buf)+1);
+                       status = write((client+i)->socket, buf, strlen(buf)+1);
                        if(status == -1){
 						  perror("Error al escribir en el cliente ha desconectar");
 						  break;
                        }
                        close((client+control)->socket);
+                       break;
                    }
                }
            }
@@ -151,6 +154,13 @@ void * leer(void *arg){
    while(1){		//Leemos los mensajes del cliente
 
        nBytes = read(clienteC->socket, buf, BUF_SIZE);
+
+       if(strcmp(buf,"del")==0){
+    	   clienteC->conectado = 0;
+    	   clienteC->estado = 0;
+    	   cont--;
+    	   break;
+       }
 
        if(nBytes == 0){
            printf("El cliente cerro la conexión\n");
