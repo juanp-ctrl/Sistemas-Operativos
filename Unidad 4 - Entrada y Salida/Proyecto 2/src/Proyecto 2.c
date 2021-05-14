@@ -63,7 +63,6 @@ void *comandos(void *arg){
 
             	   if((client+i)->conectado == 1 && (client+i)->numClientes != control ){
 
-                       printf(" envio a %s",(client+i)->nombre);
                        strcpy(buf, (client+control)->nombre);
                        strcat(buf, " ha abandonado el chat\n");
                        status = write((client+i)->socket,buf, strlen(buf)+1);
@@ -100,11 +99,11 @@ void *comandos(void *arg){
            }
 
            else{
-               printf("Clientes en linea\n");
+               printf("\nClientes en linea\n");
 
                for(int i=0; i<maxC; i++){
                    if((client+i)->conectado != 0){
-                       printf("%s\n",(client+i)->nombre);
+                       printf("~%s\n",(client+i)->nombre);
                    }
                }
            }
@@ -123,7 +122,7 @@ void *comandos(void *arg){
 
     }
 
-   return 0;
+   exit(EXIT_SUCCESS);
 }
 
 void * leer(void *arg){

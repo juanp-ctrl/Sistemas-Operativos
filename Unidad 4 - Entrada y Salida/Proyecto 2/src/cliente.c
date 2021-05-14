@@ -6,7 +6,7 @@
  */
 
 
- #include <stdio.h>
+#include <stdio.h>
  #include <string.h>
  #include <errno.h>
  #include <unistd.h>
@@ -132,7 +132,7 @@
          if (fgets(buf, BUF_SIZE, stdin) == NULL){
              printf("Entrada nula\n");
          }
-         if( 0 == strncmp(buf,":exit",strlen(":exit")) ){
+         if( 0 == strncmp(buf,"/q",strlen("/q")) ){
              printf("Sesion cerrada\n");
              break;
          }
