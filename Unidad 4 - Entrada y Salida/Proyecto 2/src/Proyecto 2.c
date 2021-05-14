@@ -26,7 +26,7 @@ struct client_t* client;
 
 struct client_t{
     int socket;
-    char nombre [64];
+    char nombre [BUF_SIZE];
     int estado;
     int conectado;
     int numClientes;
@@ -130,21 +130,17 @@ void * leer(void *arg){
 
    struct client_t *clienteC = ((struct client_t *)arg);
    ssize_t nBytes;
-   char buf[BUF_SIZE], bvd[BUF_SIZE];
+   char buf[BUF_SIZE], name[BUF_SIZE], msg[BUF_SIZE];
    int status;
 
-   nBytes = read(clienteC->socket, buf, BUF_SIZE);
-
-   strcpy((client+(cont-1))->nombre, buf);		//Asignamos el nombre
-
-   strcpy(bvd,buf);
-   strcat(bvd, " se ha unido al chat");
+   strcpy(name, (client+(cont-1))->nombre);
+   strcat(name, " se ha unido al chat");
 
    for(int i=0; i<=maxC; i++){		//Le informamos a los clientes de la nueva conexion
 
        if ((client+i)->conectado == 1){
 
-           status = write((client+i)->socket, bvd, strlen(bvd)+1);
+           status = write((client+i)->socket, name, strlen(name)+1);
 
            if(status == -1){
                perror("Error al escribir en los clientes");
@@ -152,7 +148,6 @@ void * leer(void *arg){
            }
        }
    }
-
 
    while(1){		//Leemos los mensajes del cliente
 
@@ -169,13 +164,13 @@ void * leer(void *arg){
        else {
            if (clienteC->conectado == 1){
 
-           strcat(buf, " -(");
-           strcat(buf, clienteC->nombre);
-           strcat(buf, ")");
+        	   strcpy(msg, clienteC->nombre);
+        	   strcat(msg, ": ");
+        	   strcat(msg, buf);
 
                for(int i=0; i<=maxC; i++){		//Escribimos el mensaje en todos los clientes
                    if ((client+i)->conectado == 1){
-                       status = write((client+i)->socket, buf, strlen(buf)+1);
+                       status = write((client+i)->socket, msg, strlen(msg)+1);
                    }
                }
 
@@ -199,7 +194,8 @@ void * leer(void *arg){
 
 int main(int argc, char *argv[]){
 
-    char buf[BUF_SIZE];
+    char buf[BUF_SIZE], nombre[BUF_SIZE];
+    int numBytes;
     int status;
     int enable = 1;
     int server_sd;
@@ -278,11 +274,24 @@ int main(int argc, char *argv[]){
             exit(EXIT_FAILURE);
         }
 
+        numBytes = read(client_sd, nombre, sizeof(nombre));
+
+        if(numBytes == 0){
+            printf("Nombre vacio\n");
+            break;
+        }
+
+        else if(numBytes == -1){
+            perror("Error al leer el nombre");
+            break;
+        }
+
          // 7. Creamos el hilo para las conexiones del cliente
         (client+cont)->socket = client_sd;
         (client+cont)->estado = 1;
         (client+cont)->conectado = 1;
         (client+cont)->numClientes = cont;
+        strcpy((client+cont)->nombre,nombre);
 
         if(cont < 10){
             status = pthread_create(&rxThreadId[cont], NULL, &leer, (client+cont));

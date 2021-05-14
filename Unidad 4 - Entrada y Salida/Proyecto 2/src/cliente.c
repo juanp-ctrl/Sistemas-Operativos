@@ -47,12 +47,12 @@
          }
 
          else{
-             printf("Server: %s\n",buf);
+             printf("%s\n",buf);
          }
 
      }
 
-     printf("Terminate Pthread for reading\n");
+     printf("Hilo de lectura terminado\n");
 
      client->estado = 0;
      return NULL;
@@ -61,7 +61,7 @@
  int main(int argc, char *argv[]){
 
      char buf[BUF_SIZE];
-     char nombre[64];
+     char nombre[BUF_SIZE];
      int status;
      int server_sd;
      pthread_t hilo;
@@ -69,6 +69,7 @@
 
      printf("Ingresa tu nombre:\n");
      scanf("%s",nombre);
+     printf("Bienvenido %s\n",nombre);
 
      // 1. ignoramos la señal sigpipe
      signal(SIGPIPE, SIG_IGN);
@@ -121,18 +122,18 @@
 		  perror("Error al enviar el nombre");
 	  }
 
-     while(1){
+     while(1){		//Escribimos los mensajes
 
          if(client.estado == 0){
              printf("El servidor cerro el socket\n");
              break;
          }
 
-         if (fgets(buf,BUF_SIZE,stdin) == NULL){
+         if (fgets(buf, BUF_SIZE, stdin) == NULL){
              printf("Entrada nula\n");
          }
          if( 0 == strncmp(buf,":exit",strlen(":exit")) ){
-             printf("Client exit\n");
+             printf("Sesion cerrada\n");
              break;
          }
 
